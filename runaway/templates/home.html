@@ -2,26 +2,41 @@
 
 {% block content %}
   {% if user.is_authenticated %}
-    <div  class="banner">
-      <h2><a href="{% url 'profiles:post_list' user.username %}">{{ user.username }}</a></h2>
+  <div  class="banner">
+      <a href="{% url 'profiles:post_list' user.username %}">
+      <div class="crop">
+        {% if user.userprofile.image %}
+        <img src="{{ user.userprofile.image.url }}">
+        {% endif %}
+      </div>
+      </a>
+      <h3><a href="{% url 'profiles:post_list' user.username %}">{{ user.username }}</a></h3>
     </div>
   {% endif %}
+   
   {% for post in object_list %}
-  <div class="posts">
-      <h4>{{post.location}}</h4>
+    <div class="posts">
+      <div id="loc">
+      <h3><strong><a href="{% url 'runaway:detail' post.pk %}">{{post.location}}</a></strong></h3>
+      <p><a href="{% url 'profiles:post_list' post.username %}"><em>@{{ post.username }}</em></a></p>
+      </div>
+      <div class="flex">
+      <div>
+      <a href="{% url 'profiles:post_list' post.username %}">
       {% if post.username.userprofile.image %}
-      <img src="{{ post.username.userprofile.image.url }}"></a>
+      <img class="cropped"src="{{ post.username.userprofile.image.url }}">
       {% endif %}
-      <h3><a href="{% url 'profiles:post_list' post.username %}">@{{ post.username }}</a><h3>
-      
-      <h5><em>Posted on {{ post.posted }}</em><h5>
-      {% if post.time_diff %}
-        <h5><em>Post updated on {{post.edited}}</em><h5>
-      {% endif %}
-      <div id="description">
-        <p>{{post.description}}</p> 
+      </a>
+      </div>
+      <div class="description">
+        <p>{{post.description}}</p>
         <a href="{% url 'runaway:detail' post.pk %}">READ MORE</a>
       </div>
-  </div>
+      </div>
+      <div id="right">
+        <h5><em>Posted on {{ post.posted }}</em><h5>
+      </div>
+    </div>
   {% endfor %}
+  
 {% endblock content %}

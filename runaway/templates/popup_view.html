@@ -1,26 +1,48 @@
+
 {% extends 'base.html' %}
 
 {% block content %}
-  <div>
+  <div class="view">
+    <a href="{% url 'profiles:post_list' post.username %}">
     <div class="crop">
-    {% if post.username.userprofile.image %}
-    <img src="{{ post.username.userprofile.image.url }}">
-    {% endif %}
+      {% if post.username.userprofile.image %}
+      <img src="{{ post.username.userprofile.image.url }}">
+      {% endif %}
     </div>
+    </a>
     <h2>{{ post.location }}</h2>
-    <h4><em>Posted at {{ post.posted }} by {{ post.username }}</em></h4>
+    <h4><em>Posted on {{ post.posted }} by<a href="{% url 'profiles:post_list' post.username %}">{{ post.username }}</a></em></h4>
     {% if post.created_updated_differ %}
       <h4><em>Post last updated at {{ post.edited }}</em></h4>
     {% endif %}
     <p id="detail">{{ post.post }}</p>
+    <div id="options">
+      {% if user == post.username %}
+      {% if user.is_authenticated %}
+        <h4><a href="{% url 'runaway:update' post.pk %}">+ Edit Post</a></h4>
+        <h4><a href="{% url 'runaway:delete' post.pk %}">+ Delete Post</a></h4>
+      {% endif %}
+      {% endif %}
+      <h4><a href="{% url 'runaway:add_comment' pk=post.pk %}">+ Add Comment</a></h4><br/>
+    </div>
   </div>
-  <div id="right">
-  {% if user == post.username %}
-  {% if user.is_authenticated %}
-    <p><a href="{% url 'runaway:update' post.pk %}">+ Edit Blog Post</a></p>
-    <p><a href="{% url 'runaway:delete' post.pk %}">+ Delete Blog Post</a></p>
+  {% for comment in post.comments.all %}
+  <div class="comment">
+      <a href="{% url 'profiles:post_list' comment.author %}">
+      {% if comment.author.userprofile.image %}
+      <img class="crops"src="{{ comment.author.userprofile.image.url }}">
+      {% endif %}
+      </a>
+     <div id="author">
+      <p><strong>{{ comment.author }}</strong> {{ comment.text }}</p>
+      <p><em> {{ comment.created_date }}</em>
+      {% if user == comment.author %}
+      {% if user.is_authenticated %}
+        <a href="{% url 'runaway:edit_comment' comment.pk %}">Edit</a>
+        <a href="{% url 'runaway:delete_comment' comment.pk %}">Delete</a></p>
+      {% endif %}
+      {% endif %}
+      </div>
   </div>
-    
-  {% endif %}
-  {% endif %}
+{% endfor %}
 {% endblock content %}

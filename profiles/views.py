@@ -1,6 +1,7 @@
 from django.views.generic import ListView, DetailView, FormView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy, reverse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
@@ -32,7 +33,6 @@ class UsernameProfileView(generic.DetailView):
 class ProfileView(FormView):
     template_name='user_profiles.html'
     form_class=UserProfileForm
-
     
     def form_valid(self, form):
         form.save(self.request.user)
@@ -52,4 +52,6 @@ class EditUserProfileView(UpdateView):
         return user.userprofile
 
     def get_success_url(self, *args, **kwargs):
-        return reverse('runaway:home')
+        return reverse('profiles:post_list', args=(self.kwargs['username'],))
+
+

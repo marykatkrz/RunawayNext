@@ -2,7 +2,10 @@ let req = new XMLHttpRequest();
 let submit=document.getElementById("submit");
 let token=document.getElementsByName("csrfmiddlewaretoken")[0];
 let value=JSON.parse(document.getElementById("loc-data").textContent);
-let my_obj=JSON.parse(value)
+let my_obj=JSON.parse(value);
+let header=document.getElementsByClassName("modal-title");
+header.innerHTML=`<p>location</p>`
+
     req.addEventListener("progress", function(e) {
     });
     req.addEventListener("error", function(e) {
@@ -17,10 +20,12 @@ let my_obj=JSON.parse(value)
         center: [-94.7129, 37.0902],
         zoom: 3.2
     });
+
         let geocoder=new MapboxGeocoder({
             accessToken: mapboxgl.accessToken,
             mapboxgl: mapboxgl,
     });
+    
         for(let i=0; i<my_obj.length; i++){
             let lng=my_obj[i].fields.lng
             let lat=my_obj[i].fields.lat
@@ -30,13 +35,15 @@ let my_obj=JSON.parse(value)
             let el = document.createElement('div');
             el.id = 'marker';
             new mapboxgl.Marker(el)
-            var popup = new mapboxgl.Popup({ offset: 25 })
+            let popup = new mapboxgl.Popup({ offset: 25 })
                 .setHTML(`
                 <div id="popup">
+                  <h3><strong>${my_obj[i].fields.location}</strong></h3>
                    <p>${description}</p></br>
-                   <p><a href="../post/${pk}/">READ MORE</a></p>
-                </div>
-                `)
+                   <p>
+                   <a href="../post/${pk}/">Read More</a>
+                   </p>
+                </div>`)
             new mapboxgl.Marker(el)
                 .setLngLat(spots)
                 .setPopup(popup)
@@ -52,25 +59,24 @@ let my_obj=JSON.parse(value)
                     return e.result.place_name
             }
         }
-        console.log(place())
             submit.addEventListener("click", function(){
                 new mapboxgl.Marker(el)
                 var popup = new mapboxgl.Popup({ offset: 25 })
+                .setMaxWidth("350px")
                 .setHTML(`
                 <div id="popup">
-                    <form action="../post/create/" method="post">
+                    <form action="../profiles/post/create/" method="post">
                     <input type="hidden" name="csrfmiddlewaretoken" value="${token.value}">
                     <input type="hidden" name="location" value="${place()}">
                     <input type="hidden" name="lng" value="${input[0]}">
                     <input type="hidden" name="lat" value="${input[1]}">
                     <h4>${place()}</h4>
-                    <p>Short description<p>
+                    <p>Short Description<p>
                     <input type="text" name="description">
                     <p>Add a Post!</p>
-                    <textarea type="text" name="post"></textarea>
-                    <button type="submit">Save</button>
+                    <textarea type="text" name="post" placeholder="Favorite stops, recommendations, etc..."></textarea>
+                    <button type="submit">Add a Post!</button>
                     <p><em>Marker will not save if a post is not added.</em></p>
-
                     </form>
                 </div>`
                 );              
@@ -78,17 +84,16 @@ let my_obj=JSON.parse(value)
                 .setLngLat(input)
                 .setPopup(popup) 
                 .addTo(map) 
-                
+              
             });
             let el = document.createElement('div');
             el.id = 'marker';
-            console.log(e.result.place_type)
+            
+           
         });
         
         map.addControl(geocoder)
         map.addControl(new mapboxgl.NavigationControl())
-       
-        
     });
     
    

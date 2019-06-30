@@ -1,26 +1,36 @@
   {% extends 'base.html' %}
     {% block content %}
     {% csrf_token %}
-    <div class="profile">
-    <div class="crop">
-    {% if user_profile.userprofile.image %}
-    <img src="{{ user_profile.userprofile.image.url }}">
-    {% endif %}
+    <h2 id="user">{{ user_profile.userprofile.user }}</h2>
+    <div class="flex-profile">
+      <div class="profile">
+        <div id="info">
+        <div class="crop">
+          {% if user_profile.userprofile.image %}
+          <img src="{{ user_profile.userprofile.image.url }}">
+          {% endif %}
+        </div>
+          <h4>{{ user_profile.userprofile.name }}</h4>
+          <h4>{{ user_profile.userprofile.bio }}</h4>
+          <h4>{{ user_profile.userprofile.residence }}</h4>
+        </div>
+      {% if user == user_profile.userprofile.user %}
+      {% if user.is_authenticated %}
+      <p id="submit">
+        <button type="submit"><a href="{% url 'profiles:edit_profile' user_profile.username %}">Edit Profile</a></button> 
+        <button type="submit"><a>Add Marker</a></button>
+      </p>
+      {% endif %}
+      {% endif %}
+      </div>
+      <div id='map'>
+      </div>
     </div>
-    <h2>{{ user_profile.userprofile.user }}</h2>
-    <p>{{ user_profile.userprofile.name }}<p>
-    <p>{{ user_profile.userprofile.bio }}</p>
-    <p>{{ user_profile.userprofile.residence }}</p>
-    {% if user == user_profile.userprofile.user %}
-    {% if user.is_authenticated %}
-    <div id="right">
-      <button type="submit"><a href="{% url 'profiles:edit_profile' user_profile.username %}">Edit Profile</a></button>
-      <button type="submit" id="submit">Add Marker</button>
-    </div>
-    {% endif %}
-    {% endif %}
-    <div id='map'>
-    </div>
+    <div>
+    <footer>
+      <h3>About Us</h3>
+      <p>RunawayNext is for both travelers and wannabe travelers. Share, ask questions, and plan your next adventure with the help of people just like you.</p>
+    </footer>
     </div>
     {{point_list|json_script:"loc-data" }}
     {% endblock content %}

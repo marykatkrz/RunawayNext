@@ -20,7 +20,7 @@ class Post(models.Model):
         return self.post
 
     def get_absolute_url(self):
-        return reverse('posts:detail', args=[str(self.id)])
+        return reverse('runaway:detail', args=[str(self.id)])
 
     @property
     def time_diff(self):
@@ -44,7 +44,11 @@ def create_profile(sender, **kwargs):
 
 post_save.connect(create_profile, sender=User)
 
+class Comment(models.Model):
+    post = models.ForeignKey('runaway.Post', on_delete=models.CASCADE, related_name='comments')
+    text = models.TextField()
+    author = models.ForeignKey(User,on_delete=models.CASCADE)
+    created_date = models.DateTimeField(auto_now_add=True)
   
-
-  
-
+    def __str__(self):
+        return self.text
