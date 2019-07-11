@@ -22,6 +22,8 @@
     <div id="stick">
     <header>
       <div id="right">
+      <input type="text" placeholder="Search">
+        <a><i class="fas fa-search"></i></a>
        {% if user.is_authenticated %}
         <a href="{% url 'runaway:home' %}"><i class="fas fa-home"></i></a>
         <a href="{% url 'profiles:post_list' user.username %}"><i class="fas fa-map-marked-alt"></i></a>

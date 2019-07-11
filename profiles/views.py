@@ -1,3 +1,5 @@
+from django.contrib.auth.models import User
+from django.core import serializers
 from django.views.generic import ListView, DetailView, FormView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy, reverse
@@ -5,8 +7,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
-from django.contrib.auth.models import User
-from django.core import serializers
 
 from runaway.models import Post, UserProfile
 from profiles.forms import UserProfileForm

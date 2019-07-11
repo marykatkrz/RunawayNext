@@ -1,10 +1,6 @@
 let req = new XMLHttpRequest();
 let submit=document.getElementById("submit");
 let token=document.getElementsByName("csrfmiddlewaretoken")[0];
-let value=JSON.parse(document.getElementById("loc-data").textContent);
-let my_obj=JSON.parse(value);
-let header=document.getElementsByClassName("modal-title");
-header.innerHTML=`<p>location</p>`
 
     req.addEventListener("progress", function(e) {
     });
@@ -13,6 +9,8 @@ header.innerHTML=`<p>location</p>`
     });
     req.addEventListener("load", function(e) {
         let response = JSON.parse(req.responseText); 
+        let value=JSON.parse(document.getElementById("loc-data").textContent);
+        let my_obj=JSON.parse(value);
         mapboxgl.accessToken = 'pk.eyJ1IjoibWthdDkwIiwiYSI6ImNqd3FueDh2YzAwb3c0YXQ5cHliMGNhOW0ifQ.PEpXT5nwgTV6Xx77jf8dRg';
         let map = new mapboxgl.Map({
         container: 'map',
@@ -20,12 +18,10 @@ header.innerHTML=`<p>location</p>`
         center: [-94.7129, 37.0902],
         zoom: 3.2
     });
-
         let geocoder=new MapboxGeocoder({
             accessToken: mapboxgl.accessToken,
             mapboxgl: mapboxgl,
     });
-    
         for(let i=0; i<my_obj.length; i++){
             let lng=my_obj[i].fields.lng
             let lat=my_obj[i].fields.lat
@@ -73,7 +69,7 @@ header.innerHTML=`<p>location</p>`
                     <h4>${place()}</h4>
                     <p>Short Description<p>
                     <input type="text" name="description">
-                    <p>Add a Post!</p>
+                    <p>Add Post!</p>
                     <textarea type="text" name="post" placeholder="Favorite stops, recommendations, etc..."></textarea>
                     <button type="submit">Add a Post!</button>
                     <p><em>Marker will not save if a post is not added.</em></p>
@@ -83,20 +79,14 @@ header.innerHTML=`<p>location</p>`
                 new mapboxgl.Marker(el)
                 .setLngLat(input)
                 .setPopup(popup) 
-                .addTo(map) 
-              
+                .addTo(map)  
             });
             let el = document.createElement('div');
             el.id = 'marker';
-            
-           
         });
-        
         map.addControl(geocoder)
         map.addControl(new mapboxgl.NavigationControl())
     });
-    
-   
 req.open("GET", "https://api.mapbox.com/geocoding/v5/mapbox.places/portland.json?access_token=pk.eyJ1IjoibWthdDkwIiwiYSI6ImNqd3FueDh2YzAwb3c0YXQ5cHliMGNhOW0ifQ.PEpXT5nwgTV6Xx77jf8dRg");
 req.setRequestHeader("Authorization", 'Token token="pk.eyJ1IjoibWthdDkwIiwiYSI6ImNqd3FueDh2YzAwb3c0YXQ5cHliMGNhOW0ifQ.PEpXT5nwgTV6Xx77jf8dRg"');
 req.send()

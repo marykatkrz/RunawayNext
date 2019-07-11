@@ -17,8 +17,8 @@
       {% if user == user_profile.userprofile.user %}
       {% if user.is_authenticated %}
       <p id="submit">
-        <button type="submit"><a href="{% url 'profiles:edit_profile' user_profile.username %}">Edit Profile</a></button> 
-        <button type="submit"><a>Add Marker</a></button>
+        <button type="submit" id="mybtn"><a href="{% url 'profiles:edit_profile' user_profile.username %}">Edit Profile</a></button> 
+        <button type="submit" id="mybtn"><a>Add Marker</a></button>
       </p>
       {% endif %}
       {% endif %}
@@ -31,7 +31,9 @@
       <h3>About Us</h3>
       <p>RunawayNext is for both travelers and wannabe travelers. Share, ask questions, and plan your next adventure with the help of people just like you.</p>
     </footer>
+    
     </div>
+    
     {{point_list|json_script:"loc-data" }}
     {% endblock content %}
   
