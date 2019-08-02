@@ -87,6 +87,6 @@ let token=document.getElementsByName("csrfmiddlewaretoken")[0];
         map.addControl(geocoder)
         map.addControl(new mapboxgl.NavigationControl())
     });
-req.open("GET", "https://api.mapbox.com/geocoding/v5/mapbox.places/portland.json?access_token=pk.eyJ1IjoibWthdDkwIiwiYSI6ImNqd3FueDh2YzAwb3c0YXQ5cHliMGNhOW0ifQ.PEpXT5nwgTV6Xx77jf8dRg");
-req.setRequestHeader("Authorization", 'Token token="pk.eyJ1IjoibWthdDkwIiwiYSI6ImNqd3FueDh2YzAwb3c0YXQ5cHliMGNhOW0ifQ.PEpXT5nwgTV6Xx77jf8dRg"');
+req.open("GET", "https://api.mapbox.com/geocoding/v5/mapbox.places/portland.json?access_token=");
+req.setRequestHeader("Authorization", 'Token token=""');
 req.send()
