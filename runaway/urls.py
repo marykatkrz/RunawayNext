@@ -2,6 +2,7 @@ from django.urls import path
 
 from . import views
 
+
 app_name='runaway'
 
 urlpatterns=[
@@ -13,4 +14,5 @@ urlpatterns=[
     path('profiles/<int:pk>/comment/', views.CommentView.as_view(), name='add_comment'),
     path('profiles/<int:pk>/delete', views.CommentDeleteView.as_view(),name='delete_comment'),
     path('profiles/<int:pk>/edit', views.CommentUpdateView.as_view(), name='edit_comment'),
-] 
+ 
+]  

@@ -39,6 +39,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'runaway.apps.RunawayConfig',
     'profiles.apps.ProfilesConfig',
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
+    'wagtail.embeds',
+    'wagtail.sites',
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.admin',
+    'wagtail.core',
+    'modelcluster',
+    'taggit',
   
 ]
 
@@ -50,6 +63,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'wagtail.core.middleware.SiteMiddleware',
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
 ROOT_URLCONF = 'RunawayNext.urls'
@@ -132,5 +147,5 @@ LOGIN_URL='login'
 LOGIN_REDIRECT_URL='runaway:home'
 LOGOUT_REDIRECT_URL='runaway:home'
 
-
+WAGTAIL_SITE_NAME = 'My Travel Site'
 

@@ -84,6 +84,7 @@ a:hover{
 }
 #right{
     float: right; 
+    display: flex;
 }
 
 label{
@@ -120,7 +121,7 @@ img:hover{
     height: 100px;
     overflow: hidden;
     border-radius: 50%;  
-
+    margin: 10px;
     object-fit: cover;
 }
 .crops{
@@ -133,12 +134,16 @@ img:hover{
 }
 h1{
     font-family: 'Kaushan Script', cursive;
-    font-size: 40pt;
-    margin: 15px;
+    font-size: 30pt;
+    text-align: center;
 }
 i{
     font-size: 16pt;
     margin: 2px;
+}
+#search{
+    font-size: 16pt;
+    margin: 4px;
 }
 header{
     padding: 5px;
@@ -242,5 +247,9 @@ em{
         display: flex;
         align-items: center;
         padding: 0px;
+    }
+    h1{
+        font-size: 44pt;
+        text-align: left;
     }
 }

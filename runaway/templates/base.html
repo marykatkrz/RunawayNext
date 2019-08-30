@@ -5,6 +5,7 @@
     <title>RunawayNext</title>
     <meta charset='utf-8' />
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <meta name="viewport" content="width=device-width"> 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.3.0/mapbox-gl-geocoder.css' type='text/css' />
     <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans&display=swap" rel="stylesheet">
@@ -21,8 +22,10 @@
     <div id="stick">
     <header>
       <div id="right">
+      <div id="search">
       <input type="text" placeholder="Search">
-        <a><i class="fas fa-search"></i></a>
+        <a href="" id="look"><i class="fas fa-search"></i><a>
+      </div>
        {% if user.is_authenticated %}
         <a href="{% url 'runaway:home' %}"><i class="fas fa-home"></i></a>
         <a href="{% url 'profiles:post_list' user.username %}"><i class="fas fa-map-marked-alt"></i></a>

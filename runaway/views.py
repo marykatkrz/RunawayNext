@@ -23,7 +23,7 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
     model=Post
     template_name='get_update.html'
     fields=['description','post']
-    
+  
     def get_success_url(self, *args, **kwargs):
         return reverse('runaway:detail', args=(self.object.pk,))
 
@@ -31,7 +31,6 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
     model=Post
     template_name='get_delete.html'
     success_url=reverse_lazy('runaway:home')
-
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model=Post

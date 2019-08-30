@@ -1,7 +1,7 @@
 let req = new XMLHttpRequest();
 let submit=document.getElementById("submit");
 let token=document.getElementsByName("csrfmiddlewaretoken")[0];
-
+let search=document.getElementById("search");
     req.addEventListener("progress", function(e) {
     });
     req.addEventListener("error", function(e) {
@@ -90,3 +90,4 @@ let token=document.getElementsByName("csrfmiddlewaretoken")[0];
 req.open("GET", "https://api.mapbox.com/geocoding/v5/mapbox.places/portland.json?access_token=pk.eyJ1IjoibWthdDkwIiwiYSI6ImNqd3FueDh2YzAwb3c0YXQ5cHliMGNhOW0ifQ.PEpXT5nwgTV6Xx77jf8dRg");
 req.setRequestHeader("Authorization", 'Token token="pk.eyJ1IjoibWthdDkwIiwiYSI6ImNqd3FueDh2YzAwb3c0YXQ5cHliMGNhOW0ifQ.PEpXT5nwgTV6Xx77jf8dRg"');
 req.send()
+
