@@ -11,7 +11,7 @@ let search=document.getElementById("search");
         let response = JSON.parse(req.responseText); 
         let value=JSON.parse(document.getElementById("loc-data").textContent);
         let my_obj=JSON.parse(value);
-        mapboxgl.accessToken = 'pk.eyJ1IjoibWthdDkwIiwiYSI6ImNqd3FueDh2YzAwb3c0YXQ5cHliMGNhOW0ifQ.PEpXT5nwgTV6Xx77jf8dRg';
+        mapboxgl.accessToken = '';
         let map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v9',
@@ -87,7 +87,7 @@ let search=document.getElementById("search");
         map.addControl(geocoder)
         map.addControl(new mapboxgl.NavigationControl())
     });
-req.open("GET", "https://api.mapbox.com/geocoding/v5/mapbox.places/portland.json?access_token=pk.eyJ1IjoibWthdDkwIiwiYSI6ImNqd3FueDh2YzAwb3c0YXQ5cHliMGNhOW0ifQ.PEpXT5nwgTV6Xx77jf8dRg");
-req.setRequestHeader("Authorization", 'Token token="pk.eyJ1IjoibWthdDkwIiwiYSI6ImNqd3FueDh2YzAwb3c0YXQ5cHliMGNhOW0ifQ.PEpXT5nwgTV6Xx77jf8dRg"');
+req.open("GET", "https://api.mapbox.com/geocoding/v5/mapbox.places/portland.json?access_token=");
+req.setRequestHeader("Authorization", 'Token token=""');
 req.send()
 
